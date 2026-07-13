@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
+import API_BASE_URL from '../config/api';
 import axios from 'axios';
 import { useAuth } from '../components/AuthContext';
 
@@ -50,7 +51,7 @@ const Dashboard: React.FC = () => {
     setLoading(true);
     const headers = { Authorization: `Bearer ${token}` };
     try {
-      const response = await axios.get('http://localhost:5000/api/dashboard/stats', { headers });
+      const response = await axios.get(`${API_BASE_URL}/api/dashboard/stats`, { headers });
       if (response.data && response.data.success) {
         setSummary(response.data.data.summary);
         setClassSizes(response.data.data.classSizes);
@@ -69,7 +70,7 @@ const Dashboard: React.FC = () => {
     setStudentLoading(true);
     const headers = { Authorization: `Bearer ${token}` };
     try {
-      const response = await axios.get(`http://localhost:5000/api/students/${user.id}/profile`, { headers });
+      const response = await axios.get(`${API_BASE_URL}/api/students/${user.id}/profile`, { headers });
       if (response.data && response.data.success) {
         setStudentProfile(response.data.data);
       }

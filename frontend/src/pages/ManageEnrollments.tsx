@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
+import API_BASE_URL from '../config/api';
 import axios from 'axios';
 import { useAuth } from '../components/AuthContext';
 
@@ -42,7 +43,7 @@ const ManageEnrollments: React.FC = () => {
 
   const fetchCourses = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/courses');
+      const response = await axios.get(`${API_BASE_URL}/api/courses`);
       if (response.data && response.data.success) {
         setCourses(response.data.data);
         if (response.data.data.length > 0) {
@@ -57,7 +58,7 @@ const ManageEnrollments: React.FC = () => {
   const fetchSessions = async () => {
     setLoading(true);
     try {
-      const response = await axios.get('http://localhost:5000/api/enrollment-sessions');
+      const response = await axios.get(`${API_BASE_URL}/api/enrollment-sessions`);
       if (response.data && response.data.success) {
         setSessions(response.data.data);
       }
@@ -142,7 +143,7 @@ const ManageEnrollments: React.FC = () => {
       if (editingSession) {
         // Update
         const response = await axios.put(
-          `http://localhost:5000/api/enrollment-sessions/${editingSession.MaDotTuyenSinh}`,
+          `${API_BASE_URL}/api/enrollment-sessions/${editingSession.MaDotTuyenSinh}`,
           payload,
           { headers }
         );
@@ -152,7 +153,7 @@ const ManageEnrollments: React.FC = () => {
       } else {
         // Create
         const response = await axios.post(
-          'http://localhost:5000/api/enrollment-sessions',
+          `${API_BASE_URL}/api/enrollment-sessions`,
           payload,
           { headers }
         );
@@ -175,7 +176,7 @@ const ManageEnrollments: React.FC = () => {
 
     const headers = { Authorization: `Bearer ${token}` };
     try {
-      const response = await axios.delete(`http://localhost:5000/api/enrollment-sessions/${id}`, { headers });
+      const response = await axios.delete(`${API_BASE_URL}/api/enrollment-sessions/${id}`, { headers });
       if (response.data.success) {
         setSuccess('Xóa đợt tuyển sinh thành công!');
         fetchSessions();

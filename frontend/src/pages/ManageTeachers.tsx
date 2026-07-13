@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
+import API_BASE_URL from '../config/api';
 import axios from 'axios';
 import { useAuth } from '../components/AuthContext';
 
@@ -57,7 +58,7 @@ const ManageTeachers: React.FC = () => {
     setLoading(true);
     const headers = { Authorization: `Bearer ${token}` };
     try {
-      const response = await axios.get('http://localhost:5000/api/staff', { headers });
+      const response = await axios.get(`${API_BASE_URL}/api/staff`, { headers });
       if (response.data && response.data.success) {
         setStaffList(response.data.data);
       }
@@ -116,7 +117,7 @@ const ManageTeachers: React.FC = () => {
     setSuccess('');
     const headers = { Authorization: `Bearer ${token}` };
     try {
-      const response = await axios.delete(`http://localhost:5000/api/staff/${id}`, { headers });
+      const response = await axios.delete(`${API_BASE_URL}/api/staff/${id}`, { headers });
       if (response.data.success) {
         setSuccess('Xóa nhân sự thành công!');
         fetchStaff();
@@ -165,7 +166,7 @@ const ManageTeachers: React.FC = () => {
 
     try {
       if (editingId) {
-        const response = await axios.put(`http://localhost:5000/api/staff/${editingId}`, formData, { headers });
+        const response = await axios.put(`${API_BASE_URL}/api/staff/${editingId}`, formData, { headers });
         if (response.data.success) {
           setSuccess('Cập nhật hồ sơ nhân sự thành công!');
           setIsFormOpen(false);
@@ -180,7 +181,7 @@ const ManageTeachers: React.FC = () => {
         formData.append('MatKhau', formPassword);
         formData.append('NgayVaoLam', new Date().toISOString().split('T')[0]);
 
-        const response = await axios.post('http://localhost:5000/api/staff', formData, { headers });
+        const response = await axios.post(`${API_BASE_URL}/api/staff`, formData, { headers });
         if (response.data.success) {
           setSuccess('Tạo hồ sơ nhân sự mới thành công!');
           setIsFormOpen(false);

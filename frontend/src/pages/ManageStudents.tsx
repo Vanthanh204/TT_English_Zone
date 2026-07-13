@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
+import API_BASE_URL from '../config/api';
 import axios from 'axios';
 import { useAuth } from '../components/AuthContext';
 
@@ -145,7 +146,7 @@ const ManageStudents: React.FC = () => {
     setProfileLoading(true);
     const headers = { Authorization: `Bearer ${token}` };
     try {
-      const response = await axios.get(`http://localhost:5000/api/students/${studentId}/profile`, { headers });
+      const response = await axios.get(`${API_BASE_URL}/api/students/${studentId}/profile`, { headers });
       if (response.data && response.data.success) {
         setProfileData(response.data.data);
       }
@@ -171,7 +172,7 @@ const ManageStudents: React.FC = () => {
         DiemKetThuc: formFinalGrade === '' ? null : Number(formFinalGrade),
         TrangThai: Number(formEnrollStatus)
       };
-      const response = await axios.put(`http://localhost:5000/api/enrollments/${maDangKy}/grade`, payload, { headers });
+      const response = await axios.put(`${API_BASE_URL}/api/enrollments/${maDangKy}/grade`, payload, { headers });
       if (response.data.success) {
         setSuccess('Cập nhật kết quả học tập thành công!');
         setEditingHistoryId(null);
@@ -188,7 +189,7 @@ const ManageStudents: React.FC = () => {
     setLoading(true);
     const headers = { Authorization: `Bearer ${token}` };
     try {
-      const response = await axios.get('http://localhost:5000/api/students', { headers });
+      const response = await axios.get(`${API_BASE_URL}/api/students`, { headers });
       if (response.data && response.data.success) {
         setStudents(response.data.data);
       }
@@ -202,7 +203,7 @@ const ManageStudents: React.FC = () => {
   const fetchClasses = async () => {
     const headers = { Authorization: `Bearer ${token}` };
     try {
-      const response = await axios.get('http://localhost:5000/api/classes', { headers });
+      const response = await axios.get(`${API_BASE_URL}/api/classes`, { headers });
       if (response.data && response.data.success) {
         // Filter classes that are active (TrangThai === 1 or 2) and have vacancy
         const activeClasses = response.data.data.filter((c: any) => c.TrangThai === 1 || c.TrangThai === 2);
@@ -277,7 +278,7 @@ const ManageStudents: React.FC = () => {
     try {
       if (editingId) {
         // Edit student
-        const response = await axios.put(`http://localhost:5000/api/students/${editingId}`, payload, { headers });
+        const response = await axios.put(`${API_BASE_URL}/api/students/${editingId}`, payload, { headers });
         if (response.data.success) {
           setSuccess('Cập nhật hồ sơ học viên thành công!');
           setIsFormOpen(false);
@@ -285,7 +286,7 @@ const ManageStudents: React.FC = () => {
         }
       } else {
         // Create student
-        const response = await axios.post('http://localhost:5000/api/students', payload, { headers });
+        const response = await axios.post(`${API_BASE_URL}/api/students`, payload, { headers });
         if (response.data.success) {
           setSuccess('Tạo hồ sơ học viên thành công!');
           setIsFormOpen(false);
@@ -303,7 +304,7 @@ const ManageStudents: React.FC = () => {
     setSuccess('');
     const headers = { Authorization: `Bearer ${token}` };
     try {
-      const response = await axios.delete(`http://localhost:5000/api/students/${id}`, { headers });
+      const response = await axios.delete(`${API_BASE_URL}/api/students/${id}`, { headers });
       if (response.data.success) {
         setSuccess('Xóa hồ sơ học viên thành công!');
         fetchStudents();
@@ -330,7 +331,7 @@ const ManageStudents: React.FC = () => {
 
     const headers = { Authorization: `Bearer ${token}` };
     try {
-      const response = await axios.post('http://localhost:5000/api/enrollments', {
+      const response = await axios.post(`${API_BASE_URL}/api/enrollments`, {
         MaHocVien: selectedStudent.MaHocVien,
         MaLopHoc: enrollClassId
       }, { headers });

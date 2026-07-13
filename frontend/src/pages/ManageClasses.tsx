@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
+import API_BASE_URL from '../config/api';
 import axios from 'axios';
 import { useAuth } from '../components/AuthContext';
 
@@ -72,7 +73,7 @@ const ManageClasses: React.FC = () => {
     setLoading(true);
     const headers = { Authorization: `Bearer ${token}` };
     try {
-      const response = await axios.get('http://localhost:5000/api/classes', { headers });
+      const response = await axios.get(`${API_BASE_URL}/api/classes`, { headers });
       if (response.data && response.data.success) {
         setClasses(response.data.data);
       }
@@ -86,7 +87,7 @@ const ManageClasses: React.FC = () => {
   const fetchTeachers = async () => {
     const headers = { Authorization: `Bearer ${token}` };
     try {
-      const response = await axios.get('http://localhost:5000/api/teachers', { headers });
+      const response = await axios.get(`${API_BASE_URL}/api/teachers`, { headers });
       if (response.data && response.data.success) {
         setTeachers(response.data.data);
       }
@@ -98,7 +99,7 @@ const ManageClasses: React.FC = () => {
   const fetchSessions = async () => {
     const headers = { Authorization: `Bearer ${token}` };
     try {
-      const response = await axios.get('http://localhost:5000/api/enrollment-sessions', { headers });
+      const response = await axios.get(`${API_BASE_URL}/api/enrollment-sessions`, { headers });
       if (response.data && response.data.success) {
         setSessions(response.data.data);
       }
@@ -179,7 +180,7 @@ const ManageClasses: React.FC = () => {
     try {
       if (editingId) {
         // Edit class
-        const response = await axios.put(`http://localhost:5000/api/classes/${editingId}`, payload, { headers });
+        const response = await axios.put(`${API_BASE_URL}/api/classes/${editingId}`, payload, { headers });
         if (response.data.success) {
           setSuccess('Cập nhật lớp học thành công!');
           setIsFormOpen(false);
@@ -187,7 +188,7 @@ const ManageClasses: React.FC = () => {
         }
       } else {
         // Create class
-        const response = await axios.post('http://localhost:5000/api/classes', payload, { headers });
+        const response = await axios.post(`${API_BASE_URL}/api/classes`, payload, { headers });
         if (response.data.success) {
           setSuccess('Tạo lớp học thành công!');
           setIsFormOpen(false);
@@ -205,7 +206,7 @@ const ManageClasses: React.FC = () => {
     setSuccess('');
     const headers = { Authorization: `Bearer ${token}` };
     try {
-      const response = await axios.delete(`http://localhost:5000/api/classes/${id}`, { headers });
+      const response = await axios.delete(`${API_BASE_URL}/api/classes/${id}`, { headers });
       if (response.data.success) {
         setSuccess('Xóa lớp học thành công!');
         fetchClasses();
@@ -222,7 +223,7 @@ const ManageClasses: React.FC = () => {
     setLoadingRoster(true);
     const headers = { Authorization: `Bearer ${token}` };
     try {
-      const response = await axios.get(`http://localhost:5000/api/classes/${cls.MaLopHoc}/roster`, { headers });
+      const response = await axios.get(`${API_BASE_URL}/api/classes/${cls.MaLopHoc}/roster`, { headers });
       if (response.data && response.data.success) {
         setRosterList(response.data.data);
       }

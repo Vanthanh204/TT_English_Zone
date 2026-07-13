@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
+import API_BASE_URL from '../config/api';
 import axiosReal from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -91,7 +92,7 @@ const Home: React.FC = () => {
 
   const fetchData = async () => {
     try {
-      const sessionRes = await axiosReal.get('http://localhost:5000/api/enrollment-sessions');
+      const sessionRes = await axiosReal.get(`${API_BASE_URL}/api/enrollment-sessions`);
       if (sessionRes.data && sessionRes.data.success) {
         setSessions(sessionRes.data.data);
       } else {
@@ -148,7 +149,7 @@ const Home: React.FC = () => {
     }
 
     try {
-      const response = await axiosReal.post('http://localhost:5000/api/leads', {
+      const response = await axiosReal.post(`${API_BASE_URL}/api/leads`, {
         MaDotTuyenSinh: selectedCourse.MaDotTuyenSinh,
         HoTen: regHoTen,
         SoDienThoai: regSoDienThoai,
@@ -370,7 +371,7 @@ const Home: React.FC = () => {
       {/* Hero Section */}
       <div className="relative max-w-[1200px] mx-auto px-6 pt-10 pb-8 z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 font-display">
         <div>
-          <span className="text-[#0de3f2] text-xs font-black uppercase tracking-widest block mb-1">Hệ thống Đào tạo Anh ngữ English Zone</span>
+          <span className="text-[#0de3f2] text-xs font-black uppercase tracking-widest block mb-1">Hệ thống Đào tạo Anh ngữ TT English Zone</span>
           <h1 className="text-white text-4xl md:text-5xl font-black leading-tight tracking-tight">Cổng Tuyển Sinh Trực Tuyến</h1>
           <p className="text-[#8295BA] text-sm md:text-base max-w-xl font-body leading-relaxed mt-1">
             Tra cứu đợt tuyển sinh đang mở, xem lộ trình học phí chi tiết và đăng ký xếp lịch test đầu vào ngay dưới đây.

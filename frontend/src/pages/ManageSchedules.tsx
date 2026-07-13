@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
+import API_BASE_URL from '../config/api';
 import axios from 'axios';
 import { useAuth } from '../components/AuthContext';
 
@@ -79,7 +80,7 @@ const ManageSchedules: React.FC = () => {
   const fetchClasses = async () => {
     const headers = { Authorization: `Bearer ${token}` };
     try {
-      const response = await axios.get('http://localhost:5000/api/classes', { headers });
+      const response = await axios.get(`${API_BASE_URL}/api/classes`, { headers });
       if (response.data && response.data.success) {
         setClasses(response.data.data);
         if (response.data.data.length > 0) {
@@ -110,7 +111,7 @@ interface ClassStudent {
     setLoadingRoster(true);
     const headers = { Authorization: `Bearer ${token}` };
     try {
-      const response = await axios.get(`http://localhost:5000/api/classes/${classId}/roster`, { headers });
+      const response = await axios.get(`${API_BASE_URL}/api/classes/${classId}/roster`, { headers });
       if (response.data && response.data.success) {
         setRoster(response.data.data);
       }
@@ -126,7 +127,7 @@ interface ClassStudent {
     setLoadingSchedules(true);
     const headers = { Authorization: `Bearer ${token}` };
     try {
-      const response = await axios.get(`http://localhost:5000/api/schedules/class/${classId}`, { headers });
+      const response = await axios.get(`${API_BASE_URL}/api/schedules/class/${classId}`, { headers });
       if (response.data && response.data.success) {
         setSchedules(response.data.data);
       }
@@ -179,7 +180,7 @@ interface ClassStudent {
     };
 
     try {
-      const response = await axios.post('http://localhost:5000/api/schedules/generate', payload, { headers });
+      const response = await axios.post(`${API_BASE_URL}/api/schedules/generate`, payload, { headers });
       if (response.data.success) {
         setSuccess(response.data.message);
         setIsGenerateOpen(false);
@@ -198,7 +199,7 @@ interface ClassStudent {
 
     const headers = { Authorization: `Bearer ${token}` };
     try {
-      const response = await axios.get(`http://localhost:5000/api/attendance/session/${session.MaLichHoc}`, { headers });
+      const response = await axios.get(`${API_BASE_URL}/api/attendance/session/${session.MaLichHoc}`, { headers });
       if (response.data && response.data.success) {
         setAttendanceList(response.data.data);
       }
@@ -229,7 +230,7 @@ interface ClassStudent {
     };
 
     try {
-      const response = await axios.post(`http://localhost:5000/api/attendance/session/${targetSession.MaLichHoc}`, payload, { headers });
+      const response = await axios.post(`${API_BASE_URL}/api/attendance/session/${targetSession.MaLichHoc}`, payload, { headers });
       if (response.data.success) {
         setSuccess('Lưu kết quả điểm danh thành công!');
         setIsAttendanceOpen(false);
@@ -267,7 +268,7 @@ interface ClassStudent {
     };
 
     try {
-      const response = await axios.put(`http://localhost:5000/api/schedules/${editingSession.MaLichHoc}`, payload, { headers });
+      const response = await axios.put(`${API_BASE_URL}/api/schedules/${editingSession.MaLichHoc}`, payload, { headers });
       if (response.data.success) {
         setSuccess('Cập nhật thông tin buổi học thành công!');
         setIsEditSessionOpen(false);

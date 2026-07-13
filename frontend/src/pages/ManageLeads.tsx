@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
+import API_BASE_URL from '../config/api';
 import axios from 'axios';
 import { useAuth } from '../components/AuthContext';
 
@@ -104,7 +105,7 @@ const ManageLeads: React.FC = () => {
     const headers = { Authorization: `Bearer ${token}` };
     try {
       const response = await axios.post(
-        'http://localhost:5000/api/students/bulk-convert-lead',
+        `${API_BASE_URL}/api/students/bulk-convert-lead`,
         { leadIds: selectedLeadIds },
         { headers }
       );
@@ -143,7 +144,7 @@ const ManageLeads: React.FC = () => {
     const headers = { Authorization: `Bearer ${token}` };
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/leads/${selectedLeadForSchedule.MaKhachHangTiemNang}/schedule-test`,
+        `${API_BASE_URL}/api/leads/${selectedLeadForSchedule.MaKhachHangTiemNang}/schedule-test`,
         {
           LichHenTest: formTestDateTime,
           MaNhanVienPhuTrach: formTeacherAssigned,
@@ -176,7 +177,7 @@ const ManageLeads: React.FC = () => {
     setLoading(true);
     const headers = { Authorization: `Bearer ${token}` };
     try {
-      const response = await axios.get('http://localhost:5000/api/leads', { headers });
+      const response = await axios.get(`${API_BASE_URL}/api/leads`, { headers });
       if (response.data && response.data.success) {
         setLeads(response.data.data);
       }
@@ -190,7 +191,7 @@ const ManageLeads: React.FC = () => {
   const fetchTeachers = async () => {
     const headers = { Authorization: `Bearer ${token}` };
     try {
-      const response = await axios.get('http://localhost:5000/api/teachers', { headers });
+      const response = await axios.get(`${API_BASE_URL}/api/teachers`, { headers });
       if (response.data && response.data.success) {
         setTeachers(response.data.data);
         if (response.data.data.length > 0) {
@@ -204,7 +205,7 @@ const ManageLeads: React.FC = () => {
 
   const fetchSessions = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/enrollment-sessions');
+      const response = await axios.get(`${API_BASE_URL}/api/enrollment-sessions`);
       if (response.data && response.data.success) {
         setSessions(response.data.data);
       }
@@ -261,14 +262,14 @@ const ManageLeads: React.FC = () => {
 
     try {
       // 1. Create Lead
-      const createRes = await axios.post('http://localhost:5000/api/leads', leadPayload);
+      const createRes = await axios.post(`${API_BASE_URL}/api/leads`, leadPayload);
       if (createRes.data.success) {
         const newLeadId = createRes.data.data.MaKhachHangTiemNang;
 
         // 2. Schedule Test if checked
         if (addScheduleTest && addTestDateTime && addTeacherAssigned) {
           await axios.put(
-            `http://localhost:5000/api/leads/${newLeadId}/schedule-test`,
+            `${API_BASE_URL}/api/leads/${newLeadId}/schedule-test`,
             {
               LichHenTest: addTestDateTime,
               MaNhanVienPhuTrach: addTeacherAssigned,
@@ -295,7 +296,7 @@ const ManageLeads: React.FC = () => {
     const headers = { Authorization: `Bearer ${token}` };
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/leads/${leadId}/status`,
+        `${API_BASE_URL}/api/leads/${leadId}/status`,
         { TrangThai: newStatus },
         { headers }
       );
@@ -340,7 +341,7 @@ const ManageLeads: React.FC = () => {
     try {
       if (selectedLead.TrangThai >= 4) {
         // Edit existing placement test score
-        const response = await axios.put(`http://localhost:5000/api/placement-tests/lead/${selectedLead.MaKhachHangTiemNang}`, payload, { headers });
+        const response = await axios.put(`${API_BASE_URL}/api/placement-tests/lead/${selectedLead.MaKhachHangTiemNang}`, payload, { headers });
         if (response.data.success) {
           setSuccess('Cập nhật điểm thi đầu vào thành công!');
           setIsTestModalOpen(false);
@@ -348,7 +349,7 @@ const ManageLeads: React.FC = () => {
         }
       } else {
         // Create new placement test score
-        const response = await axios.post('http://localhost:5000/api/placement-tests', payload, { headers });
+        const response = await axios.post(`${API_BASE_URL}/api/placement-tests`, payload, { headers });
         if (response.data.success) {
           setSuccess('Ghi nhận điểm thi đầu vào và cập nhật trạng thái khách hàng thành công!');
           setIsTestModalOpen(false);
@@ -366,7 +367,7 @@ const ManageLeads: React.FC = () => {
     setSuccess('');
     const headers = { Authorization: `Bearer ${token}` };
     try {
-      const response = await axios.post(`http://localhost:5000/api/students/convert-lead/${lead.MaKhachHangTiemNang}`, {}, { headers });
+      const response = await axios.post(`${API_BASE_URL}/api/students/convert-lead/${lead.MaKhachHangTiemNang}`, {}, { headers });
       if (response.data.success) {
         setSuccess(`Chuyển đổi thành công! Học viên được tạo với mã ${response.data.data.MaHocVien}`);
         fetchLeads();
@@ -382,7 +383,7 @@ const ManageLeads: React.FC = () => {
     setSuccess('');
     const headers = { Authorization: `Bearer ${token}` };
     try {
-      const response = await axios.delete(`http://localhost:5000/api/leads/${id}`, { headers });
+      const response = await axios.delete(`${API_BASE_URL}/api/leads/${id}`, { headers });
       if (response.data.success) {
         setSuccess('Xóa khách hàng tiềm năng thành công!');
         fetchLeads();

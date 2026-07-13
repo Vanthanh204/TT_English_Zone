@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
+import API_BASE_URL from '../config/api';
 import axios from 'axios';
 import { useAuth } from '../components/AuthContext';
 
@@ -56,7 +57,7 @@ const ManagePayments: React.FC = () => {
     setError('');
     const headers = { Authorization: `Bearer ${token}` };
     try {
-      const response = await axios.get('http://localhost:5000/api/payments/tuition', {
+      const response = await axios.get(`${API_BASE_URL}/api/payments/tuition`, {
         headers,
         params: {
           search: search || undefined,
@@ -113,7 +114,7 @@ const ManagePayments: React.FC = () => {
     };
 
     try {
-      const response = await axios.post('http://localhost:5000/api/payments/receipt', payload, { headers });
+      const response = await axios.post(`${API_BASE_URL}/api/payments/receipt`, payload, { headers });
       if (response.data.success) {
         setSuccess(`Ghi nhận biên lai ${response.data.data.MaPhieuThu} thành công.`);
         setIsCollectOpen(false);
@@ -133,7 +134,7 @@ const ManagePayments: React.FC = () => {
 
     const headers = { Authorization: `Bearer ${token}` };
     try {
-      const response = await axios.get(`http://localhost:5000/api/payments/tuition/${record.MaHocPhi}`, { headers });
+      const response = await axios.get(`${API_BASE_URL}/api/payments/tuition/${record.MaHocPhi}`, { headers });
       if (response.data && response.data.success) {
         setReceiptList(response.data.data.receipts);
       }

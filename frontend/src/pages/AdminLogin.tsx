@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
+import API_BASE_URL from '../config/api';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../components/AuthContext';
@@ -18,7 +19,7 @@ const AdminLogin: React.FC = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/login', { username, password });
+      const response = await axios.post(`${API_BASE_URL}/api/auth/login`, { username, password });
       
       const { role } = response.data.user;
       const validRoles = ['Quản lý', 'Giáo viên', 'Tư vấn', 'Học vụ', 'Kế toán'];

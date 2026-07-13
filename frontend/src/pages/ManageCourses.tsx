@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
+import API_BASE_URL from '../config/api';
 import axios from 'axios';
 import { useAuth } from '../components/AuthContext';
 
@@ -33,7 +34,7 @@ const ManageCourses: React.FC = () => {
   const fetchCourses = async () => {
     setLoading(true);
     try {
-      const response = await axios.get('http://localhost:5000/api/courses');
+      const response = await axios.get(`${API_BASE_URL}/api/courses`);
       if (response.data && response.data.success) {
         setCourses(response.data.data);
       }
@@ -93,7 +94,7 @@ const ManageCourses: React.FC = () => {
       if (editingCourse) {
         // Update
         const response = await axios.put(
-          `http://localhost:5000/api/courses/${editingCourse.MaKhoaHoc}`,
+          `${API_BASE_URL}/api/courses/${editingCourse.MaKhoaHoc}`,
           payload,
           { headers }
         );
@@ -103,7 +104,7 @@ const ManageCourses: React.FC = () => {
       } else {
         // Create
         const response = await axios.post(
-          'http://localhost:5000/api/courses',
+          `${API_BASE_URL}/api/courses`,
           payload,
           { headers }
         );
@@ -126,7 +127,7 @@ const ManageCourses: React.FC = () => {
 
     const headers = { Authorization: `Bearer ${token}` };
     try {
-      const response = await axios.delete(`http://localhost:5000/api/courses/${id}`, { headers });
+      const response = await axios.delete(`${API_BASE_URL}/api/courses/${id}`, { headers });
       if (response.data.success) {
         setSuccess('Xóa khóa học thành công!');
         fetchCourses();
