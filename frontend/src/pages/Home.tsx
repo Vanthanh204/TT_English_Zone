@@ -211,7 +211,7 @@ const Home: React.FC = () => {
   const groupedList = getGroupedCampaigns();
 
   return (
-    <div className="min-h-screen flex flex-col relative bg-[#060B19] text-white font-sans overflow-x-hidden">
+    <div className="min-h-screen flex flex-col relative bg-[#F5F7FA] text-slate-800 font-sans overflow-x-hidden">
       {/* CSS Custom Style block */}
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
@@ -225,25 +225,26 @@ const Home: React.FC = () => {
         }
 
         .glass-panel {
-          background: rgba(255, 255, 255, 0.03);
+          background: rgba(255, 255, 255, 0.85);
           backdrop-filter: blur(24px);
           -webkit-backdrop-filter: blur(24px);
-          border: 1px solid rgba(255, 255, 255, 0.1);
+          border: 1px solid rgba(0, 0, 0, 0.06);
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 16px rgba(0, 0, 0, 0.03);
           transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         
         .glass-panel-hoverable:hover {
-          background: rgba(255, 255, 255, 0.07);
+          background: rgba(255, 255, 255, 0.95);
           transform: translateY(-4px) scale(1.01);
-          border-color: rgba(13, 227, 242, 0.3);
-          box-shadow: 0 10px 40px rgba(13, 227, 242, 0.15);
+          border-color: rgba(6, 182, 212, 0.3);
+          box-shadow: 0 10px 40px rgba(6, 182, 212, 0.12);
         }
 
         .ambient-orb {
           position: absolute;
           border-radius: 50%;
-          filter: blur(120px);
-          opacity: 0.35;
+          filter: blur(150px);
+          opacity: 0.12;
           z-index: 0;
           pointer-events: none;
         }
@@ -264,19 +265,19 @@ const Home: React.FC = () => {
 
         .spatial-input {
           width: 100%;
-          background-color: rgba(255, 255, 255, 0.05);
-          border: 1px solid rgba(255, 255, 255, 0.1);
+          background-color: #ffffff;
+          border: 1px solid rgba(0, 0, 0, 0.1);
           border-radius: 12px;
           padding: 1.25rem 1rem 0.5rem 1rem;
-          color: white;
+          color: #1e293b;
           transition: all 0.2s ease;
           outline: none;
         }
 
         .spatial-input:focus {
-          border-color: #0de3f2;
-          box-shadow: inset 0 0 10px rgba(13, 227, 242, 0.1), 0 0 15px rgba(13, 227, 242, 0.2);
-          background-color: rgba(255, 255, 255, 0.08);
+          border-color: #06b6d4;
+          box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.15);
+          background-color: #ffffff;
         }
 
         .spatial-label {
@@ -284,7 +285,7 @@ const Home: React.FC = () => {
           left: 1rem;
           top: 50%;
           transform: translateY(-50%);
-          color: #8295BA;
+          color: #94a3b8;
           pointer-events: none;
           transition: all 0.2s ease;
           font-size: 0.95rem;
@@ -295,7 +296,7 @@ const Home: React.FC = () => {
           top: 0.55rem;
           transform: translateY(0);
           font-size: 0.72rem;
-          color: #0de3f2;
+          color: #06b6d4;
         }
 
         .loader {
@@ -315,14 +316,14 @@ const Home: React.FC = () => {
         /* Timeline styles */
         .timeline-line {
           width: 2px;
-          background: linear-gradient(to bottom, rgba(13, 227, 242, 0.8), rgba(13, 227, 242, 0.1));
-          box-shadow: 0 0 10px rgba(13, 227, 242, 0.5);
+          background: linear-gradient(to bottom, rgba(6, 182, 212, 0.6), rgba(6, 182, 212, 0.08));
+          box-shadow: 0 0 8px rgba(6, 182, 212, 0.15);
         }
 
         /* Custom scrollbars */
         html, body {
-          background-color: #060B19 !important;
-          color: #FFFFFF !important;
+          background-color: #F5F7FA !important;
+          color: #1e293b !important;
           overflow-x: hidden;
           margin: 0;
           padding: 0;
@@ -333,35 +334,35 @@ const Home: React.FC = () => {
           height: 8px;
         }
         ::-webkit-scrollbar-track {
-          background: rgba(255, 255, 255, 0.02);
+          background: rgba(0, 0, 0, 0.02);
         }
         ::-webkit-scrollbar-thumb {
-          background: rgba(255, 255, 255, 0.1);
+          background: rgba(0, 0, 0, 0.12);
           border-radius: 4px;
         }
         ::-webkit-scrollbar-thumb:hover {
-          background: rgba(13, 227, 242, 0.5);
+          background: rgba(6, 182, 212, 0.5);
         }
       `}</style>
 
       {/* Ambient Background Orbs */}
-      <div className="ambient-orb bg-[#7000FF] w-[35rem] h-[35rem] top-[-10%] left-[-10%] animate-orb-float"></div>
-      <div className="ambient-orb bg-[#0de3f2] w-[30rem] h-[30rem] bottom-[-10%] right-[-5%] opacity-20 animate-orb-float" style={{ animationDelay: '2s' }}></div>
+      <div className="ambient-orb bg-[#06b6d4] w-[35rem] h-[35rem] top-[-10%] left-[-10%] animate-orb-float"></div>
+      <div className="ambient-orb bg-[#8b5cf6] w-[30rem] h-[30rem] bottom-[-10%] right-[-5%] opacity-10 animate-orb-float" style={{ animationDelay: '2s' }}></div>
 
       {/* Header Container */}
       <div className="relative w-full z-50 flex flex-col max-w-[1200px] mx-auto px-4 py-5 font-display">
-        <header className="flex items-center justify-between border-b border-white/10 px-6 py-4 glass-panel rounded-full">
-          <div className="flex items-center gap-3 text-white">
-            <span className="material-symbols-outlined text-[#0de3f2] text-2xl font-black">domain</span>
-            <h2 className="text-white text-lg font-bold leading-tight tracking-tight font-display">TT English Zone</h2>
+        <header className="flex items-center justify-between px-6 py-4 glass-panel rounded-full">
+          <div className="flex items-center gap-3">
+            <span className="material-symbols-outlined text-[#06b6d4] text-2xl font-black">domain</span>
+            <h2 className="text-slate-800 text-lg font-bold leading-tight tracking-tight font-display">TT English Zone</h2>
           </div>
           <nav className="hidden md:flex gap-8 items-center">
-            <a className="text-[#0de3f2] hover:text-white transition-colors text-xs font-bold uppercase tracking-wider cursor-pointer" href="#catalog">Danh mục tuyển sinh</a>
-            <a className="text-white/60 hover:text-white transition-colors text-xs font-bold uppercase tracking-wider cursor-pointer" onClick={() => navigate('/login')}>Cổng Học Viên</a>
+            <a className="text-[#06b6d4] hover:text-white transition-colors text-xs font-bold uppercase tracking-wider cursor-pointer" href="#catalog">Danh mục tuyển sinh</a>
+            <a className="text-slate-500 hover:text-slate-800 transition-colors text-xs font-bold uppercase tracking-wider cursor-pointer" onClick={() => navigate('/login')}>Cổng Học Viên</a>
           </nav>
           <button 
             onClick={() => navigate('/login')}
-            className="px-5 py-2 border border-[#0de3f2]/30 hover:border-[#0de3f2] bg-[#0de3f2]/10 hover:bg-[#0de3f2] text-[#0de3f2] hover:text-slate-900 rounded-full text-xs font-black uppercase tracking-wider transition-all duration-300 shadow-[0_0_10px_rgba(13,227,242,0.15)] hover:shadow-[0_0_15px_rgba(13,227,242,0.35)] cursor-pointer"
+            className="px-5 py-2 border border-[#0de3f2]/30 hover:border-[#0de3f2] bg-[#0de3f2]/10 hover:bg-[#0de3f2] text-[#06b6d4] hover:text-slate-900 rounded-full text-xs font-black uppercase tracking-wider transition-all duration-300 shadow-[0_0_10px_rgba(13,227,242,0.15)] hover:shadow-[0_0_15px_rgba(13,227,242,0.35)] cursor-pointer"
           >
             Đăng nhập
           </button>
@@ -371,20 +372,20 @@ const Home: React.FC = () => {
       {/* Hero Section */}
       <div className="relative max-w-[1200px] mx-auto px-6 pt-10 pb-8 z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 font-display">
         <div>
-          <span className="text-[#0de3f2] text-xs font-black uppercase tracking-widest block mb-1">Hệ thống Đào tạo Anh ngữ TT English Zone</span>
-          <h1 className="text-white text-4xl md:text-5xl font-black leading-tight tracking-tight">Cổng Tuyển Sinh Trực Tuyến</h1>
-          <p className="text-[#8295BA] text-sm md:text-base max-w-xl font-body leading-relaxed mt-1">
+          <span className="text-[#06b6d4] text-xs font-black uppercase tracking-widest block mb-1">Hệ thống Đào tạo Anh ngữ TT English Zone</span>
+          <h1 className="text-slate-800 text-4xl md:text-5xl font-black leading-tight tracking-tight">Cổng Tuyển Sinh Trực Tuyến</h1>
+          <p className="text-slate-500 text-sm md:text-base max-w-xl font-body leading-relaxed mt-1">
             Tra cứu đợt tuyển sinh đang mở, xem lộ trình học phí chi tiết và đăng ký xếp lịch test đầu vào ngay dưới đây.
           </p>
         </div>
         
         {/* Search Input Box */}
-        <div className="w-full md:w-80 flex items-center gap-2 p-1.5 bg-white/5 border border-white/10 rounded-full px-4">
+        <div className="w-full md:w-80 flex items-center gap-2 p-1.5 bg-white border border-slate-200 rounded-full px-4 shadow-sm">
           <span className="material-symbols-outlined text-gray-400 text-lg">search</span>
           <input
             type="text"
             placeholder="Tìm đợt tuyển sinh hoặc khóa học..."
-            className="bg-transparent border-none text-xs text-white outline-none w-full placeholder-gray-500 font-body py-1"
+            className="bg-transparent border-none text-xs text-slate-800 outline-none w-full placeholder-slate-400 font-body py-1"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
@@ -397,9 +398,9 @@ const Home: React.FC = () => {
         <div className="glass-panel rounded-2xl p-6 relative overflow-hidden text-left hover:scale-[1.02] transition-transform duration-300">
           <div className="absolute inset-0 bg-gradient-to-br from-[#7000FF]/15 to-transparent opacity-40"></div>
           <div className="relative z-10 flex flex-col gap-2">
-            <span className="material-symbols-outlined text-[#0de3f2] text-3xl font-black mb-1">verified</span>
-            <h3 className="text-white font-display font-bold text-base">Cam kết chất lượng</h3>
-            <p className="text-[11px] text-[#8295BA] leading-relaxed">
+            <span className="material-symbols-outlined text-[#06b6d4] text-3xl font-black mb-1">verified</span>
+            <h3 className="text-slate-800 font-display font-bold text-base">Cam kết chất lượng</h3>
+            <p className="text-[11px] text-slate-500 leading-relaxed">
               Cam kết đầu ra chuẩn quốc tế bằng văn bản pháp lý. Học viên được đào tạo lại hoàn toàn miễn phí 100% nếu chưa đạt kết quả.
             </p>
           </div>
@@ -410,8 +411,8 @@ const Home: React.FC = () => {
           <div className="absolute inset-0 bg-gradient-to-br from-[#0de3f2]/10 to-transparent opacity-40"></div>
           <div className="relative z-10 flex flex-col gap-2">
             <span className="material-symbols-outlined text-[#7000FF] text-3xl font-black mb-1">groups</span>
-            <h3 className="text-white font-display font-bold text-base">Chỉ tiêu sĩ số nhỏ</h3>
-            <p className="text-[11px] text-[#8295BA] leading-relaxed">
+            <h3 className="text-slate-800 font-display font-bold text-base">Chỉ tiêu sĩ số nhỏ</h3>
+            <p className="text-[11px] text-slate-500 leading-relaxed">
               Lớp học giới hạn tối đa 15 học viên. Giúp giảng viên và trợ giảng có thể theo sát và sửa bài chi tiết cho từng cá nhân.
             </p>
           </div>
@@ -422,8 +423,8 @@ const Home: React.FC = () => {
           <div className="absolute inset-0 bg-gradient-to-br from-[#7000FF]/10 to-transparent opacity-40"></div>
           <div className="relative z-10 flex flex-col gap-2">
             <span className="material-symbols-outlined text-[#10b981] text-3xl font-black mb-1">calendar_today</span>
-            <h3 className="text-white font-display font-bold text-base">Lịch học linh hoạt</h3>
-            <p className="text-[11px] text-[#8295BA] leading-relaxed">
+            <h3 className="text-slate-800 font-display font-bold text-base">Lịch học linh hoạt</h3>
+            <p className="text-[11px] text-slate-500 leading-relaxed">
               Học viên bận rộn dễ dàng lựa chọn lớp 3 buổi/tuần hoặc 6 buổi/tuần, phân bổ ca học Sáng/Chiều linh động trải đều các ngày.
             </p>
           </div>
@@ -434,8 +435,8 @@ const Home: React.FC = () => {
           <div className="absolute inset-0 bg-gradient-to-br from-[#e11d48]/10 to-transparent opacity-40"></div>
           <div className="relative z-10 flex flex-col gap-2">
             <span className="material-symbols-outlined text-[#e11d48] text-3xl font-black mb-1">sync</span>
-            <h3 className="text-white font-display font-bold text-base">Đăng ký & Lịch test</h3>
-            <p className="text-[11px] text-[#8295BA] leading-relaxed">
+            <h3 className="text-slate-800 font-display font-bold text-base">Đăng ký & Lịch test</h3>
+            <p className="text-[11px] text-slate-500 leading-relaxed">
               Thông tin đăng ký tuyển sinh của học viên được kết nối trực tiếp với phòng Học vụ để chuẩn bị đề thi thử và xếp lịch kiểm tra.
             </p>
           </div>
@@ -444,7 +445,7 @@ const Home: React.FC = () => {
 
       {/* ======================= DƯỚI LÀ CÁC ĐỢT TUYỂN SINH MẪU SYLLABUS TIMELINE ======================= */}
       <main id="catalog" className="flex-grow w-full max-w-[1200px] mx-auto px-6 pb-24 z-10 relative space-y-20">
-        <h2 className="text-white font-display text-xl tracking-wider uppercase font-bold text-left border-l-4 border-[#0de3f2] pl-3 mb-6">
+        <h2 className="text-slate-800 font-display text-xl tracking-wider uppercase font-bold text-left border-l-4 border-[#0de3f2] pl-3 mb-6">
           Danh Sách Đợt Tuyển Sinh Đang Mở
         </h2>
 
@@ -452,7 +453,7 @@ const Home: React.FC = () => {
           groupedList.map((campaign) => (
             <div 
               key={campaign.TenDotTuyenSinh} 
-              className="flex flex-col lg:flex-row gap-12 border-b border-white/5 pb-16 relative"
+              className="flex flex-col lg:flex-row gap-12 border-b border-slate-200 pb-16 relative"
             >
               {/* Left Column: Sticky Campaign info panel */}
               <aside className="w-full lg:w-1/3 relative font-display">
@@ -460,33 +461,33 @@ const Home: React.FC = () => {
                   {/* Main campaign card */}
                   <div className="glass-panel rounded-2xl p-8 flex flex-col gap-6 shadow-2xl">
                     <div className="flex flex-col gap-3 text-left">
-                      <div className="inline-flex items-center justify-center self-start px-3 py-1 rounded-full bg-[#0de3f2]/10 border border-[#0de3f2]/20 text-[#0de3f2] text-xs font-display tracking-widest uppercase font-bold">
+                      <div className="inline-flex items-center justify-center self-start px-3 py-1 rounded-full bg-[#0de3f2]/10 border border-[#0de3f2]/20 text-[#06b6d4] text-xs font-display tracking-widest uppercase font-bold">
                         Chi tiết đợt tuyển sinh
                       </div>
-                      <h3 className="font-display text-2xl font-bold leading-tight tracking-tight text-white">
+                      <h3 className="font-display text-2xl font-bold leading-tight tracking-tight text-slate-800">
                         {campaign.TenDotTuyenSinh}
                       </h3>
-                      <p className="text-[#8295BA] text-xs font-body leading-relaxed">
+                      <p className="text-slate-500 text-xs font-body leading-relaxed">
                         Danh sách các khóa học mở đăng ký trong đợt tuyển sinh này. Vui lòng lựa chọn khóa học ở cột lộ trình bên phải để đăng ký giữ chỗ.
                       </p>
                     </div>
-                    <hr className="border-white/10 w-full" />
+                    <hr className="border-slate-200 w-full" />
                     
                     {/* Time limit details */}
-                    <div className="bg-white/5 border border-white/10 rounded-xl p-3.5 text-xs text-left font-body leading-relaxed">
-                      <span className="text-[#0de3f2] font-black uppercase tracking-wider block mb-1 font-display">📅 Thời gian tuyển sinh</span>
-                      Hạn đăng ký: Từ <strong className="text-white">{formatDateDisplay(campaign.NgayBatDau)}</strong> đến <strong className="text-white">{formatDateDisplay(campaign.NgayKetThuc)}</strong>.
+                    <div className="bg-slate-50 border border-slate-200 rounded-xl p-3.5 text-xs text-left font-body leading-relaxed">
+                      <span className="text-[#06b6d4] font-black uppercase tracking-wider block mb-1 font-display">📅 Thời gian tuyển sinh</span>
+                      Hạn đăng ký: Từ <strong className="text-slate-800">{formatDateDisplay(campaign.NgayBatDau)}</strong> đến <strong className="text-slate-800">{formatDateDisplay(campaign.NgayKetThuc)}</strong>.
                     </div>
 
                     {/* Meta Indicators */}
                     <div className="grid grid-cols-2 gap-3 mt-1 text-left font-body">
-                      <div className="flex flex-col gap-1 p-3 rounded-xl bg-white/5 border border-white/5">
-                        <span className="material-symbols-outlined text-[#0de3f2] text-lg">calendar_month</span>
-                        <span className="text-white text-[10px] font-bold block mt-0.5">Khai giảng: {formatDateDisplay(campaign.NgayKhaiGiang)}</span>
+                      <div className="flex flex-col gap-1 p-3 rounded-xl bg-slate-50 border border-slate-100">
+                        <span className="material-symbols-outlined text-[#06b6d4] text-lg">calendar_month</span>
+                        <span className="text-slate-700 text-[10px] font-bold block mt-0.5">Khai giảng: {formatDateDisplay(campaign.NgayKhaiGiang)}</span>
                       </div>
-                      <div className="flex flex-col gap-1 p-3 rounded-xl bg-white/5 border border-white/5">
+                      <div className="flex flex-col gap-1 p-3 rounded-xl bg-slate-50 border border-slate-100">
                         <span className="material-symbols-outlined text-[#10b981] text-lg">group</span>
-                        <span className="text-white text-[10px] font-bold block mt-0.5">Chỉ tiêu: {campaign.ChiTieu} học viên</span>
+                        <span className="text-slate-700 text-[10px] font-bold block mt-0.5">Chỉ tiêu: {campaign.ChiTieu} học viên</span>
                       </div>
                     </div>
                   </div>
@@ -502,37 +503,37 @@ const Home: React.FC = () => {
                   {campaign.Courses.map((c, index) => (
                     <div key={c.MaDotTuyenSinh} className="flex gap-8 relative group">
                       {/* Node dot */}
-                      <div className="mt-6 w-4 h-4 rounded-full bg-[#0de3f2] flex-shrink-0 relative z-10 shadow-[0_0_15px_rgba(13,227,242,0.8)] scale-110">
+                      <div className="mt-6 w-4 h-4 rounded-full bg-[#0de3f2] flex-shrink-0 relative z-10 shadow-[0_0_10px_rgba(6,182,212,0.5)] scale-110">
                         <div className="absolute inset-[-6px] border border-[#0de3f2]/30 rounded-full animate-ping"></div>
                       </div>
                       
                       {/* Card Content */}
-                      <div className="glass-panel rounded-2xl p-6 md:p-8 flex-1 border-white/5 bg-white/[0.02] hover:bg-white/[0.06] transition-all duration-300 shadow-[0_0_20px_rgba(13,227,242,0.04)]">
+                      <div className="glass-panel rounded-2xl p-6 md:p-8 flex-1 border-white/5 bg-white hover:bg-slate-50 transition-all duration-300 shadow-sm hover:shadow-md">
                         <div className="flex justify-between items-start mb-3">
-                          <span className="text-[#0de3f2] font-display text-xs tracking-wider uppercase font-bold">Khóa học {index + 1}</span>
-                          <span className="material-symbols-outlined text-[#8295BA] group-hover:text-[#0de3f2] transition-colors text-xl font-bold">school</span>
+                          <span className="text-[#06b6d4] font-display text-xs tracking-wider uppercase font-bold">Khóa học {index + 1}</span>
+                          <span className="material-symbols-outlined text-slate-500 group-hover:text-[#06b6d4] transition-colors text-xl font-bold">school</span>
                         </div>
-                        <h4 className="font-display text-2xl font-bold text-white mb-2">{c.TenKhoaHoc}</h4>
+                        <h4 className="font-display text-2xl font-bold text-slate-800 mb-2">{c.TenKhoaHoc}</h4>
                         
-                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 my-4 py-3 border-y border-white/5 text-xs text-[#8295BA] font-body">
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 my-4 py-3 border-y border-slate-100 text-xs text-slate-500 font-body">
                           <div>
-                            <strong>Trình độ Target:</strong> <span className="text-white font-bold">{c.TrinhDo}</span>
+                            <strong>Trình độ Target:</strong> <span className="text-slate-800 font-bold">{c.TrinhDo}</span>
                           </div>
                           <div>
-                            <strong>Thời lượng:</strong> <span className="text-white font-bold">{c.SoBuoiHoc} buổi học</span>
+                            <strong>Thời lượng:</strong> <span className="text-slate-800 font-bold">{c.SoBuoiHoc} buổi học</span>
                           </div>
                           <div>
-                            <strong>Học phí toàn khóa:</strong> <span className="text-[#0de3f2] font-black">{formatCurrency(c.HocPhi)}</span>
+                            <strong>Học phí toàn khóa:</strong> <span className="text-[#06b6d4] font-black">{formatCurrency(c.HocPhi)}</span>
                           </div>
                         </div>
 
-                        <p className="text-[#8295BA] text-xs leading-relaxed mb-6 font-body">
+                        <p className="text-slate-500 text-xs leading-relaxed mb-6 font-body">
                           Chương trình đào tạo Anh ngữ chuẩn đầu ra của English Zone. Học viên được trang bị đầy đủ tài liệu, luyện tập thực tế và thi thử định kỳ.
                         </p>
 
                         <button 
                           onClick={() => handleOpenRegModal(c)}
-                          className="bg-[#0de3f2]/10 hover:bg-[#0de3f2] border border-[#0de3f2]/30 text-[#0de3f2] hover:text-slate-950 font-bold py-2.5 px-6 rounded-full transition-all duration-300 hover:shadow-[0_0_15px_rgba(13,227,242,0.3)] flex items-center justify-center gap-2 cursor-pointer text-xs uppercase tracking-wider font-display"
+                          className="bg-[#0de3f2]/10 hover:bg-[#0de3f2] border border-[#0de3f2]/30 text-[#06b6d4] hover:text-slate-950 font-bold py-2.5 px-6 rounded-full transition-all duration-300 hover:shadow-lg flex items-center justify-center gap-2 cursor-pointer text-xs uppercase tracking-wider font-display"
                         >
                           <span>Đăng ký học khóa này</span>
                           <span className="material-symbols-outlined text-xs font-black">arrow_forward</span>
@@ -545,7 +546,7 @@ const Home: React.FC = () => {
             </div>
           ))
         ) : (
-          <div className="glass-panel rounded-[24px] p-8 text-center text-gray-500 font-display">
+          <div className="glass-panel rounded-[24px] p-8 text-center text-slate-400 font-display">
             {loading ? 'Đang tải danh sách tuyển sinh...' : 'Không tìm thấy đợt tuyển sinh hoạt động nào.'}
           </div>
         )}
@@ -555,22 +556,22 @@ const Home: React.FC = () => {
       {isRegModalOpen && selectedCourse && (
         <div className="fixed inset-0 flex items-center justify-center z-50 p-4 overflow-hidden">
           {/* Backdrop overlay */}
-          <div className="absolute inset-0 bg-black/65 backdrop-blur-md z-0" onClick={() => setIsRegModalOpen(false)}></div>
+          <div className="absolute inset-0 bg-black/40 backdrop-blur-md z-0" onClick={() => setIsRegModalOpen(false)}></div>
           
           {/* Form Modal Container */}
           <main className="relative z-10 w-full max-w-[800px] mx-auto animate-orb-float">
-            <div className="bg-white/5 backdrop-blur-2xl border border-white/10 rounded-[24px] overflow-hidden shadow-2xl relative flex flex-col">
+            <div className="bg-white backdrop-blur-2xl border border-slate-200 rounded-[24px] overflow-hidden shadow-2xl relative flex flex-col">
               {/* Top progress glow line */}
-              <div className="w-full h-[2px] bg-white/10 absolute top-0 left-0">
-                <div className="h-full bg-[#0de3f2]" style={{ width: '100%', boxShadow: '0 0 10px #0de3f2' }}></div>
+              <div className="w-full h-[2px] bg-slate-200 absolute top-0 left-0">
+                <div className="h-full bg-[#0de3f2]" style={{ width: '100%', boxShadow: '0 0 8px #06b6d4' }}></div>
               </div>
 
               <div className="p-6 md:p-10 max-h-[90vh] overflow-y-auto">
                 {/* Header */}
                 <div className="mb-6 text-center">
-                  <p className="text-[#0de3f2] text-xs font-bold tracking-widest uppercase mb-1 font-display">Step 1 of 2: Personal Details</p>
-                  <h1 className="text-3xl font-bold tracking-tight text-white mb-1.5 font-display">Enrollment Portal</h1>
-                  <p className="text-[#8295BA] text-xs font-body">Đăng ký giữ chỗ và xếp lịch kiểm tra xếp lớp tại trung tâm cho khóa học: **{selectedCourse.TenKhoaHoc}**.</p>
+                  <p className="text-[#06b6d4] text-xs font-bold tracking-widest uppercase mb-1 font-display">Step 1 of 2: Personal Details</p>
+                  <h1 className="text-3xl font-bold tracking-tight text-slate-800 mb-1.5 font-display">Enrollment Portal</h1>
+                  <p className="text-slate-500 text-xs font-body">Đăng ký giữ chỗ và xếp lịch kiểm tra xếp lớp tại trung tâm cho khóa học: **{selectedCourse.TenKhoaHoc}**.</p>
                 </div>
 
                 {regError && (
@@ -646,7 +647,7 @@ const Home: React.FC = () => {
                     {/* Gender Selection */}
                     <div className="input-group">
                       <select 
-                        className="spatial-input spatial-select font-bold text-white bg-slate-900" 
+                        className="spatial-input spatial-select font-bold text-slate-800 bg-white" 
                         id="regGender" 
                         value={regGioiTinh}
                         onChange={(e) => setRegGioiTinh(Number(e.target.value))}
@@ -656,7 +657,7 @@ const Home: React.FC = () => {
                         <option value={0}>Nữ</option>
                       </select>
                       <label className="spatial-label" htmlFor="regGender">Giới tính *</label>
-                      <span className="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-[#8295BA] pointer-events-none text-base">expand_more</span>
+                      <span className="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none text-base">expand_more</span>
                     </div>
 
                     {/* Target round (Disabled & auto-selected) */}
@@ -686,16 +687,16 @@ const Home: React.FC = () => {
                   </div>
 
                   {/* Action Buttons */}
-                  <div className="pt-4 mt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3">
+                  <div className="pt-4 mt-4 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3">
                     <button 
-                      className="text-[#8295BA] hover:text-white transition-colors text-xs font-semibold" 
+                      className="text-slate-500 hover:text-white transition-colors text-xs font-semibold" 
                       type="button"
                       onClick={() => setIsRegModalOpen(false)}
                     >
                       Hủy bỏ đơn đăng ký
                     </button>
                     <button 
-                      className="w-full sm:w-auto px-8 py-3.5 bg-[#0de3f2] text-slate-955 rounded-full font-bold hover:bg-white transition-all duration-300 hover:shadow-[0_0_20px_rgba(13,227,242,0.4)] flex items-center justify-center gap-2 group cursor-pointer" 
+                      className="w-full sm:w-auto px-8 py-3.5 bg-[#0de3f2] text-slate-955 rounded-full font-bold hover:bg-[#0891b2] transition-all duration-300 hover:shadow-lg flex items-center justify-center gap-2 group cursor-pointer" 
                       id="submitBtn" 
                       type="submit"
                       disabled={submitting}
@@ -718,38 +719,38 @@ const Home: React.FC = () => {
       )}
 
       {/* Footer */}
-      <footer className="border-t border-white/10 bg-black/30 backdrop-blur-md w-full py-12 mt-20 relative z-10 font-body">
+      <footer className="border-t border-slate-200 bg-white/80 backdrop-blur-md w-full py-12 mt-20 relative z-10 font-body">
         <div className="max-w-[1200px] mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="flex flex-col space-y-4">
-            <span className="text-xl font-extrabold text-[#0de3f2] tracking-tight font-display">TT English Zone</span>
-            <p className="text-[#8295BA] text-xs leading-relaxed">
+            <span className="text-xl font-extrabold text-[#06b6d4] tracking-tight font-display">TT English Zone</span>
+            <p className="text-slate-500 text-xs leading-relaxed">
               Hệ thống đào tạo Anh ngữ chuẩn quốc tế. Trải nghiệm không gian học tập tối ưu và ca học linh động cho học viên toàn cầu.
             </p>
           </div>
           
           <div className="flex flex-col space-y-2 text-left">
-            <h4 className="font-bold text-white text-xs uppercase tracking-wider mb-2 font-display">Khóa học tuyển sinh</h4>
-            <span className="text-[#8295BA] text-xs text-left">Tiếng Anh Giao Tiếp Cơ Bản</span>
-            <span className="text-[#8295BA] text-xs text-left">Luyện thi IELTS Foundation / Intensive</span>
-            <span className="text-[#8295BA] text-xs text-left">Luyện thi TOEIC Accelerated 650+</span>
+            <h4 className="font-bold text-slate-700 text-xs uppercase tracking-wider mb-2 font-display">Khóa học tuyển sinh</h4>
+            <span className="text-slate-500 text-xs text-left">Tiếng Anh Giao Tiếp Cơ Bản</span>
+            <span className="text-slate-500 text-xs text-left">Luyện thi IELTS Foundation / Intensive</span>
+            <span className="text-slate-500 text-xs text-left">Luyện thi TOEIC Accelerated 650+</span>
           </div>
           
           <div className="flex flex-col space-y-2 text-left">
-            <h4 className="font-bold text-white text-xs uppercase tracking-wider mb-2 font-display">Cam kết chất lượng</h4>
-            <span className="text-[#8295BA] text-xs text-left">Cam kết chuẩn đầu ra văn bản</span>
-            <span className="text-[#8295BA] text-xs text-left">Giảng viên trình độ chuyên môn cao</span>
-            <span className="text-[#8295BA] text-xs text-left">Đào tạo lại hoàn toàn miễn phí</span>
+            <h4 className="font-bold text-slate-700 text-xs uppercase tracking-wider mb-2 font-display">Cam kết chất lượng</h4>
+            <span className="text-slate-500 text-xs text-left">Cam kết chuẩn đầu ra văn bản</span>
+            <span className="text-slate-500 text-xs text-left">Giảng viên trình độ chuyên môn cao</span>
+            <span className="text-slate-500 text-xs text-left">Đào tạo lại hoàn toàn miễn phí</span>
           </div>
           
           <div className="flex flex-col space-y-2 text-left">
-            <h4 className="font-bold text-white text-xs uppercase tracking-wider mb-2 font-display">Thông tin liên hệ</h4>
-            <span className="text-[#8295BA] text-xs text-left">Địa chỉ: Cổng trường English Zone</span>
-            <span className="text-[#8295BA] text-xs text-left">Điện thoại hỗ trợ học viên</span>
-            <span className="text-[#8295BA] text-xs text-left">Email: support@englishzone.edu.vn</span>
+            <h4 className="font-bold text-slate-700 text-xs uppercase tracking-wider mb-2 font-display">Thông tin liên hệ</h4>
+            <span className="text-slate-500 text-xs text-left">Địa chỉ: Cổng trường English Zone</span>
+            <span className="text-slate-500 text-xs text-left">Điện thoại hỗ trợ học viên</span>
+            <span className="text-slate-500 text-xs text-left">Email: support@englishzone.edu.vn</span>
           </div>
         </div>
         
-        <div className="max-w-[1200px] mx-auto px-6 mt-10 pt-6 border-t border-white/5 text-center">
+        <div className="max-w-[1200px] mx-auto px-6 mt-10 pt-6 border-t border-slate-100 text-center">
           <p className="text-gray-500 text-xs font-semibold">
             © 2026 TT English Zone. Đồng hành cùng tri thức toàn cầu.
           </p>
